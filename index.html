@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro Kanban BOL ES0304</title>
+
+  <!-- Librería para lectura de QR. Necesita internet si no se descarga en local. -->
+  <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+
+  <style>
+    :root {
+      --kaizen-blue: #005EB8;
+      --kaizen-dark: #172033;
+      --kaizen-muted: #667085;
+      --kaizen-bg: #F5F8FC;
+      --kaizen-card: #FFFFFF;
+      --kaizen-line: #E4E7EC;
+      --kaizen-soft: #EEF5FC;
+      --success: #16803C;
+      --warning: #B54708;
+      --danger: #B42318;
+      --shadow: 0 18px 45px rgba(16, 24, 40, 0.08);
+      --radius: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--kaizen-bg);
+      color: var(--kaizen-dark);
+    }
+
+    body {
+      padding: 16px;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #FFFFFF 0%, #EEF5FC 100%);
+      border: 1px solid var(--kaizen-line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .brand-mark {
+      width: 46px;
+      height: 46px;
+      border-radius: 16px;
+      background: var(--kaizen-blue);
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 22px;
+    }
+
+    .brand-text strong {
+      display: block;
+      font-size: 15px;
+    }
+
+    .brand-text span {
+      display: block;
+      color: var(--kaizen-muted);
+      font-size: 13px;
+      margin-top: 2px;
+    }
+
+    h1 {
+      margin: 0 0 10px 0;
+      font-size: 30px;
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--kaizen-muted);
+      font-size: 15px;
+      line-height: 1.5;
+      max-width: 720px;
+    }
+
+    .session-card {
+      background: #FFFFFF;
+      border: 1px solid #D5E8FA;
+      border-radius: 22px;
+      padding: 18px;
+      box-shadow: 0 10px 26px rgba(16, 24, 40, 0.05);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      color: #344054;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    input, textarea {
+      width: 100%;
+      border: 1px solid #D0D5DD;
+      border-radius: 12px;
+      padding: 12px 13px;
+      font: inherit;
+      font-size: 15px;
+      background: #FFFFFF;
+      color: var(--kaizen-dark);
+      outline: none;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 88px;
+    }
+
+    input:focus, textarea:focus {
+      border-color: var(--kaizen-blue);
+      box-shadow: 0 0 0 4px rgba(0, 94, 184, 0.12);
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .panel {
+      background: var(--kaizen-card);
+      border: 1px solid var(--kaizen-line);
+      border-radius: var(--radius);
+      box-shadow: 0 10px 28px rgba(16, 24, 40, 0.05);
+      padding: 18px;
+      min-width: 0;
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: -0.02em;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: var(--kaizen-soft);
+      color: #184C7C;
+      font-weight: 800;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .scanner-box {
+      width: 100%;
+      min-height: 290px;
+      border: 1px dashed #BFD7EE;
+      border-radius: 18px;
+      background: #FBFDFF;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #reader {
+      width: 100%;
+      min-height: 290px;
+    }
+
+    .hint {
+      margin: 10px 0 0 0;
+      color: var(--kaizen-muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    button {
+      border: none;
+      border-radius: 999px;
+      padding: 11px 16px;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.15s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      filter: brightness(0.97);
+    }
+
+    .btn-primary {
+      background: var(--kaizen-blue);
+      color: #FFFFFF;
+    }
+
+    .btn-secondary {
+      background: #EFF4FB;
+      color: #184C7C;
+      border: 1px solid #D0E3F6;
+    }
+
+    .btn-ghost {
+      background: #FFFFFF;
+      color: #344054;
+      border: 1px solid #D0D5DD;
+    }
+
+    .btn-success {
+      background: #ECFDF3;
+      color: var(--success);
+      border: 1px solid #ABEFC6;
+    }
+
+    .btn-danger {
+      background: #FEF3F2;
+      color: var(--danger);
+      border: 1px solid #FECDCA;
+    }
+
+    .last-scan {
+      margin-top: 14px;
+      background: #F9FAFB;
+      border: 1px solid var(--kaizen-line);
+      border-radius: 14px;
+      padding: 12px;
+      color: #344054;
+      font-size: 13px;
+      line-height: 1.45;
+      min-height: 58px;
+      white-space: pre-wrap;
+    }
+
+    .manual-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .manual-grid .full {
+      grid-column: 1 / -1;
+    }
+
+    .toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin: 18px 0 12px 0;
+    }
+
+    .stats {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      min-width: 130px;
+      background: #FFFFFF;
+      border: 1px solid var(--kaizen-line);
+      border-radius: 16px;
+      padding: 11px 13px;
+    }
+
+    .stat b {
+      display: block;
+      font-size: 24px;
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 4px;
+      color: var(--kaizen-muted);
+      font-size: 12px;
+    }
+
+    .empty {
+      padding: 34px 18px;
+      border: 1px dashed #D0D5DD;
+      border-radius: 16px;
+      background: #FCFCFD;
+      color: var(--kaizen-muted);
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    th {
+      padding: 11px 10px;
+      background: #F2F4F7;
+      color: #344054;
+      border-bottom: 1px solid var(--kaizen-line);
+      text-align: left;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 11px 10px;
+      border-bottom: 1px solid #EAECF0;
+      color: #344054;
+      vertical-align: top;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .toast {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      max-width: 360px;
+      display: none;
+      background: #101828;
+      color: #FFFFFF;
+      border-radius: 16px;
+      padding: 12px 15px;
+      box-shadow: 0 18px 45px rgba(16, 24, 40, 0.22);
+      font-size: 14px;
+      z-index: 50;
+    }
+
+    .toast.show {
+      display: block;
+    }
+
+    .toast.ok {
+      background: #05603A;
+    }
+
+    .toast.warn {
+      background: #7A2E0E;
+    }
+
+    @media (max-width: 920px) {
+      body {
+        padding: 10px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 18px;
+        border-radius: 22px;
+      }
+
+      h1 {
+        font-size: 25px;
+      }
+
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .manual-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .toolbar {
+        align-items: stretch;
+      }
+
+      .stats,
+      .buttons {
+        width: 100%;
+      }
+
+      .stat {
+        flex: 1 1 120px;
+      }
+
+      table {
+        min-width: 760px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="app">
+    <section class="hero">
+      <div>
+        <div class="brand">
+          <div class="brand-mark">K</div>
+          <div class="brand-text">
+            <strong>Kaizen Institute</strong>
+            <span>Registro Kanban BOL · ES0304</span>
+          </div>
+        </div>
+        <h1>Registro temporal de salidas de supermercado a borde de línea</h1>
+        <p class="subtitle">
+          Introduce el número de serie del coche, escanea cada QR del bloque BOL y, al finalizar la preparación,
+          envía un resumen a la responsable de petición de materiales.
+        </p>
+      </div>
+
+      <div class="session-card">
+        <label for="serial">Número de serie en preparación</label>
+        <input id="serial" placeholder="Ej. 6155-2002" autocomplete="off">
+
+        <label for="operator" style="margin-top: 12px;">Operario / equipo</label>
+        <input id="operator" placeholder="Nombre del operario" autocomplete="off">
+      </div>
+    </section>
+
+    <section class="main-grid">
+      <div class="panel">
+        <div class="panel-header">
+          <h2>Escaneo de QR</h2>
+          <span class="pill">Cámara</span>
+        </div>
+
+        <div class="scanner-box">
+          <div id="reader"></div>
+        </div>
+
+        <p class="hint">
+          El QR debe contener líneas tipo <strong>B:</strong> bloque, <strong>Z:</strong> zona, <strong>C:</strong> coche,
+          <strong>S:</strong> supermercado, <strong>P:</strong> preparación y después los componentes.
+        </p>
+
+        <div class="buttons">
+          <button class="btn-primary" id="startScan" type="button">Iniciar cámara</button>
+          <button class="btn-ghost" id="stopScan" type="button">Parar cámara</button>
+        </div>
+
+        <div class="last-scan" id="lastScan">Último escaneo: todavía no hay registros.</div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <h2>Añadir manualmente</h2>
+          <span class="pill">Plan B</span>
+        </div>
+
+        <div class="manual-grid">
+          <div>
+            <label for="mBlock">Bloque BOL</label>
+            <input id="mBlock" placeholder="120-P100.1">
+          </div>
+
+          <div>
+            <label for="mCar">Coche</label>
+            <input id="mCar" placeholder="C120">
+          </div>
+
+          <div>
+            <label for="mZone">Zona</label>
+            <input id="mZone" placeholder="SALA / SC / BB">
+          </div>
+
+          <div>
+            <label for="mSm">SM</label>
+            <input id="mSm" placeholder="Carril / Playa">
+          </div>
+
+          <div>
+            <label for="mPrep">PREP</label>
+            <input id="mPrep" placeholder="Sí / No">
+          </div>
+
+          <div>
+            <label for="mCount">Nº componentes</label>
+            <input id="mCount" type="number" min="0" placeholder="3">
+          </div>
+
+          <div class="full">
+            <label for="mComponents">Componentes separados por salto de línea</label>
+            <textarea id="mComponents" placeholder="BB2360711000100&#10;BB23600711000B0"></textarea>
+          </div>
+        </div>
+
+        <div class="buttons">
+          <button class="btn-secondary" id="addManual" type="button">Añadir registro manual</button>
+        </div>
+
+        <p class="hint">Esta opción sirve si la cámara falla o el QR está deteriorado.</p>
+      </div>
+    </section>
+
+    <section class="toolbar">
+      <div class="stats">
+        <div class="stat">
+          <b id="countBlocks">0</b>
+          <span>bloques registrados</span>
+        </div>
+        <div class="stat">
+          <b id="countComponents">0</b>
+          <span>componentes asociados</span>
+        </div>
+        <div class="stat">
+          <b id="countCars">0</b>
+          <span>coches distintos</span>
+        </div>
+      </div>
+
+      <div class="buttons" style="margin-top: 0;">
+        <button class="btn-success" id="sendEmail" type="button">Enviar resumen</button>
+        <button class="btn-ghost" id="downloadCsv" type="button">Descargar CSV</button>
+        <button class="btn-danger" id="clearSession" type="button">Vaciar sesión</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <h2>Registros pendientes de enviar</h2>
+        <span class="pill">Sesión local</span>
+      </div>
+
+      <div id="empty" class="empty">Todavía no se ha escaneado ningún palet para esta preparación.</div>
+
+      <div class="table-wrap" id="tableWrap" style="display: none;">
+        <table>
+          <thead>
+            <tr>
+              <th>Hora</th>
+              <th>Bloque</th>
+              <th>Zona</th>
+              <th>Coche</th>
+              <th>SM</th>
+              <th>PREP</th>
+              <th>Componentes</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const BEATRIZ_EMAIL = "beatriz.albiach@stadlerrail.com";
+    const STORAGE_KEY = "kanban_bol_es0304_session_v2";
+
+    const state = {
+      records: [],
+      scanner: null,
+      scanning: false
+    };
+
+    function el(id) {
+      return document.getElementById(id);
+    }
+
+    function toast(message, type) {
+      const box = el("toast");
+      box.textContent = message;
+      box.className = "toast show " + (type || "");
+      setTimeout(function () {
+        box.className = "toast";
+      }, 2800);
+    }
+
+    function escapeHtml(value) {
+      return String(value == null ? "" : value).replace(/[&<>\"']/g, function (char) {
+        return {
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          "\"": "&quot;",
+          "'": "&#39;"
+        }[char];
+      });
+    }
+
+    function loadSession() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          state.records = parsed.records || [];
+        }
+      } catch (error) {
+        state.records = [];
+      }
+
+      el("serial").value = localStorage.getItem(STORAGE_KEY + "_serial") || "";
+      el("operator").value = localStorage.getItem(STORAGE_KEY + "_operator") || "";
+      render();
+    }
+
+    function saveSession() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ records: state.records }));
+      localStorage.setItem(STORAGE_KEY + "_serial", el("serial").value.trim());
+      localStorage.setItem(STORAGE_KEY + "_operator", el("operator").value.trim());
+    }
+
+    function parseQr(rawText) {
+      const decoded = rawText.includes("data=") ? decodeURIComponent(rawText.split("data=").pop()) : rawText;
+      const lines = decoded.split(/\r?\n/).map(function (line) {
+        return line.trim();
+      }).filter(Boolean);
+
+      const record = {
+        id: "qr_" + Date.now(),
+        raw: decoded,
+        time: new Date().toISOString(),
+        block: "",
+        zone: "",
+        car: "",
+        sm: "",
+        prep: "",
+        components: []
+      };
+
+      lines.forEach(function (line) {
+        if (line.indexOf("B:") === 0) record.block = line.slice(2).trim();
+        else if (line.indexOf("Z:") === 0) record.zone = line.slice(2).trim();
+        else if (line.indexOf("C:") === 0) record.car = line.slice(2).trim();
+        else if (line.indexOf("S:") === 0) record.sm = line.slice(2).trim();
+        else if (line.indexOf("P:") === 0) record.prep = line.slice(2).trim();
+        else record.components.push(line.trim());
+      });
+
+      record.count = record.components.length;
+      return record;
+    }
+
+    function addRecord(record) {
+      const serial = el("serial").value.trim();
+      if (!serial) {
+        toast("Antes de registrar, introduce el número de serie.", "warn");
+        el("serial").focus();
+        return;
+      }
+
+      if (!record.block) {
+        toast("QR no válido: no se ha encontrado el campo B: bloque.", "warn");
+        return;
+      }
+
+      const duplicate = state.records.some(function (item) {
+        return item.block === record.block;
+      });
+
+      if (duplicate) {
+        const accept = confirm("El bloque " + record.block + " ya está registrado en esta sesión. ¿Quieres añadirlo igualmente?");
+        if (!accept) return;
+      }
+
+      record.serial = serial;
+      record.operator = el("operator").value.trim();
+      state.records.push(record);
+      saveSession();
+      render();
+
+      el("lastScan").textContent =
+        "Último escaneo registrado:\n" +
+        "Bloque: " + (record.block || "-") + "\n" +
+        "Zona: " + (record.zone || "-") + "\n" +
+        "Coche: " + (record.car || "-") + "\n" +
+        "Componentes: " + (record.count || 0);
+
+      toast("Bloque " + record.block + " registrado", "ok");
+    }
+
+    function render() {
+      const records = state.records;
+      const totalComponents = records.reduce(function (sum, item) {
+        return sum + (Number(item.count) || 0);
+      }, 0);
+
+      const cars = new Set(records.map(function (item) {
+        return item.car;
+      }).filter(Boolean));
+
+      el("countBlocks").textContent = records.length;
+      el("countComponents").textContent = totalComponents;
+      el("countCars").textContent = cars.size;
+
+      el("empty").style.display = records.length ? "none" : "block";
+      el("tableWrap").style.display = records.length ? "block" : "none";
+
+      el("rows").innerHTML = records.map(function (record) {
+        const time = new Date(record.time).toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" });
+        return "<tr>" +
+          "<td>" + escapeHtml(time) + "</td>" +
+          "<td><strong>" + escapeHtml(record.block || "-") + "</strong></td>" +
+          "<td>" + escapeHtml(record.zone || "-") + "</td>" +
+          "<td>" + escapeHtml(record.car || "-") + "</td>" +
+          "<td>" + escapeHtml(record.sm || "-") + "</td>" +
+          "<td>" + escapeHtml(record.prep || "-") + "</td>" +
+          "<td>" + escapeHtml((record.components || []).join(", ")) + "</td>" +
+          "<td><button class=\"btn-ghost\" type=\"button\" onclick=\"removeRecord('" + record.id + "')\">Eliminar</button></td>" +
+          "</tr>";
+      }).join("");
+    }
+
+    window.removeRecord = function (id) {
+      state.records = state.records.filter(function (record) {
+        return record.id !== id;
+      });
+      saveSession();
+      render();
+    };
+
+    async function startScanner() {
+      if (state.scanning) return;
+
+      if (typeof Html5Qrcode === "undefined") {
+        toast("No se ha cargado la librería de QR. Revisa conexión a internet o usa entrada manual.", "warn");
+        return;
+      }
+
+      if (!state.scanner) {
+        state.scanner = new Html5Qrcode("reader");
+      }
+
+      try {
+        await state.scanner.start(
+          { facingMode: "environment" },
+          { fps: 10, qrbox: { width: 250, height: 250 } },
+          function (decodedText) {
+            addRecord(parseQr(decodedText));
+          }
+        );
+        state.scanning = true;
+      } catch (error) {
+        toast("No se ha podido iniciar la cámara. Revisa permisos o usa entrada manual.", "warn");
+      }
+    }
+
+    async function stopScanner() {
+      if (state.scanner && state.scanning) {
+        await state.scanner.stop();
+        state.scanning = false;
+      }
+    }
+
+    function buildEmailBody() {
+      const serial = el("serial").value.trim();
+      const operator = el("operator").value.trim();
+      const date = new Date().toLocaleString("es-ES");
+      const totalComponents = state.records.reduce(function (sum, item) {
+        return sum + (Number(item.count) || 0);
+      }, 0);
+
+      const lines = [];
+      lines.push("Hola Beatriz,");
+      lines.push("");
+      lines.push("Se ha finalizado la preparación del BOL para el número de serie " + serial + ".");
+      lines.push("Operario/equipo: " + (operator || "No indicado"));
+      lines.push("Fecha y hora de envío: " + date);
+      lines.push("");
+      lines.push("Bloques registrados:");
+
+      state.records.forEach(function (record, index) {
+        lines.push(
+          (index + 1) + ". " + (record.block || "-") +
+          " | Zona: " + (record.zone || "-") +
+          " | Coche: " + (record.car || "-") +
+          " | SM: " + (record.sm || "-") +
+          " | PREP: " + (record.prep || "-") +
+          " | Componentes: " + ((record.components || []).join(", ") || "-")
+        );
+      });
+
+      lines.push("");
+      lines.push("Total bloques: " + state.records.length);
+      lines.push("Total componentes asociados: " + totalComponents);
+      lines.push("");
+      lines.push("Un saludo.");
+
+      return lines.join("\n");
+    }
+
+    function sendEmail() {
+      const serial = el("serial").value.trim();
+
+      if (!serial) {
+        toast("Introduce el número de serie antes de enviar.", "warn");
+        return;
+      }
+
+      if (!state.records.length) {
+        toast("No hay registros pendientes de enviar.", "warn");
+        return;
+      }
+
+      const subject = "Registro salida Kanban BOL - Serie " + serial;
+      const href = "mailto:" + encodeURIComponent(BEATRIZ_EMAIL) +
+        "?subject=" + encodeURIComponent(subject) +
+        "&body=" + encodeURIComponent(buildEmailBody());
+
+      window.location.href = href;
+    }
+
+    function downloadCsv() {
+      if (!state.records.length) {
+        toast("No hay registros para descargar.", "warn");
+        return;
+      }
+
+      const headers = ["serie", "operario", "fecha_hora", "bloque", "zona", "coche", "sm", "prep", "num_componentes", "componentes"];
+      const rows = state.records.map(function (record) {
+        return [
+          el("serial").value.trim(),
+          el("operator").value.trim(),
+          record.time,
+          record.block,
+          record.zone,
+          record.car,
+          record.sm,
+          record.prep,
+          record.count,
+          (record.components || []).join(" | ")
+        ];
+      });
+
+      const csv = [headers].concat(rows).map(function (row) {
+        return row.map(function (value) {
+          return "\"" + String(value == null ? "" : value).replace(/\"/g, "\"\"") + "\"";
+        }).join(";");
+      }).join("\n");
+
+      const blob = new Blob(["\ufeff" + csv], { type: "text/csv;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "registro_kanban_" + (el("serial").value.trim() || "sin_serie") + ".csv";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    el("startScan").addEventListener("click", startScanner);
+    el("stopScan").addEventListener("click", stopScanner);
+    el("sendEmail").addEventListener("click", sendEmail);
+    el("downloadCsv").addEventListener("click", downloadCsv);
+
+    el("clearSession").addEventListener("click", function () {
+      const accept = confirm("¿Vaciar todos los registros temporales de esta preparación?");
+      if (!accept) return;
+      state.records = [];
+      saveSession();
+      render();
+      toast("Sesión vaciada", "ok");
+    });
+
+    el("addManual").addEventListener("click", function () {
+      const components = el("mComponents").value.split(/\r?\n/).map(function (line) {
+        return line.trim();
+      }).filter(Boolean);
+
+      addRecord({
+        id: "manual_" + Date.now(),
+        raw: "manual",
+        time: new Date().toISOString(),
+        block: el("mBlock").value.trim(),
+        car: el("mCar").value.trim(),
+        zone: el("mZone").value.trim(),
+        sm: el("mSm").value.trim(),
+        prep: el("mPrep").value.trim(),
+        components: components,
+        count: Number(el("mCount").value) || components.length
+      });
+    });
+
+    el("serial").addEventListener("change", saveSession);
+    el("operator").addEventListener("change", saveSession);
+
+    loadSession();
+  </script>
+</body>
+</html>
