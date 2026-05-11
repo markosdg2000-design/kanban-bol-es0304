@@ -24,9 +24,7 @@
       --radius: 20px;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     html, body {
       width: 100%;
@@ -39,9 +37,7 @@
       color: var(--kaizen-dark);
     }
 
-    body {
-      padding: 16px;
-    }
+    body { padding: 16px; }
 
     .app {
       width: 100%;
@@ -81,17 +77,8 @@
       font-size: 22px;
     }
 
-    .brand-text strong {
-      display: block;
-      font-size: 15px;
-    }
-
-    .brand-text span {
-      display: block;
-      color: var(--kaizen-muted);
-      font-size: 13px;
-      margin-top: 2px;
-    }
+    .brand-text strong { display: block; font-size: 15px; }
+    .brand-text span { display: block; color: var(--kaizen-muted); font-size: 13px; margin-top: 2px; }
 
     h1 {
       margin: 0 0 10px 0;
@@ -136,10 +123,7 @@
       outline: none;
     }
 
-    textarea {
-      resize: vertical;
-      min-height: 88px;
-    }
+    textarea { resize: vertical; min-height: 118px; }
 
     input:focus, textarea:focus {
       border-color: var(--kaizen-blue);
@@ -170,11 +154,7 @@
       margin-bottom: 14px;
     }
 
-    h2 {
-      margin: 0;
-      font-size: 18px;
-      letter-spacing: -0.02em;
-    }
+    h2 { margin: 0; font-size: 18px; letter-spacing: -0.02em; }
 
     .pill {
       display: inline-flex;
@@ -201,16 +181,26 @@
       justify-content: center;
     }
 
-    #reader {
-      width: 100%;
-      min-height: 290px;
-    }
+    #reader { width: 100%; min-height: 290px; }
 
     .hint {
       margin: 10px 0 0 0;
       color: var(--kaizen-muted);
       font-size: 13px;
       line-height: 1.45;
+    }
+
+    .code-sample {
+      margin: 10px 0 0 0;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: #F9FAFB;
+      border: 1px solid var(--kaizen-line);
+      color: #344054;
+      font-family: Consolas, Monaco, monospace;
+      font-size: 12px;
+      line-height: 1.45;
+      white-space: pre-wrap;
     }
 
     .buttons {
@@ -230,39 +220,13 @@
       transition: 0.15s ease;
     }
 
-    button:hover {
-      transform: translateY(-1px);
-      filter: brightness(0.97);
-    }
+    button:hover { transform: translateY(-1px); filter: brightness(0.97); }
 
-    .btn-primary {
-      background: var(--kaizen-blue);
-      color: #FFFFFF;
-    }
-
-    .btn-secondary {
-      background: #EFF4FB;
-      color: #184C7C;
-      border: 1px solid #D0E3F6;
-    }
-
-    .btn-ghost {
-      background: #FFFFFF;
-      color: #344054;
-      border: 1px solid #D0D5DD;
-    }
-
-    .btn-success {
-      background: #ECFDF3;
-      color: var(--success);
-      border: 1px solid #ABEFC6;
-    }
-
-    .btn-danger {
-      background: #FEF3F2;
-      color: var(--danger);
-      border: 1px solid #FECDCA;
-    }
+    .btn-primary { background: var(--kaizen-blue); color: #FFFFFF; }
+    .btn-secondary { background: #EFF4FB; color: #184C7C; border: 1px solid #D0E3F6; }
+    .btn-ghost { background: #FFFFFF; color: #344054; border: 1px solid #D0D5DD; }
+    .btn-success { background: #ECFDF3; color: var(--success); border: 1px solid #ABEFC6; }
+    .btn-danger { background: #FEF3F2; color: var(--danger); border: 1px solid #FECDCA; }
 
     .last-scan {
       margin-top: 14px;
@@ -283,9 +247,7 @@
       gap: 12px;
     }
 
-    .manual-grid .full {
-      grid-column: 1 / -1;
-    }
+    .manual-grid .full { grid-column: 1 / -1; }
 
     .toolbar {
       display: flex;
@@ -296,11 +258,7 @@
       margin: 18px 0 12px 0;
     }
 
-    .stats {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
+    .stats { display: flex; gap: 10px; flex-wrap: wrap; }
 
     .stat {
       min-width: 130px;
@@ -310,19 +268,8 @@
       padding: 11px 13px;
     }
 
-    .stat b {
-      display: block;
-      font-size: 24px;
-      line-height: 1;
-      letter-spacing: -0.04em;
-    }
-
-    .stat span {
-      display: block;
-      margin-top: 4px;
-      color: var(--kaizen-muted);
-      font-size: 12px;
-    }
+    .stat b { display: block; font-size: 24px; line-height: 1; letter-spacing: -0.04em; }
+    .stat span { display: block; margin-top: 4px; color: var(--kaizen-muted); font-size: 12px; }
 
     .empty {
       padding: 34px 18px;
@@ -334,10 +281,7 @@
       font-size: 14px;
     }
 
-    .table-wrap {
-      width: 100%;
-      overflow-x: auto;
-    }
+    .table-wrap { width: 100%; overflow-x: auto; }
 
     table {
       width: 100%;
@@ -364,9 +308,7 @@
       vertical-align: top;
     }
 
-    tr:last-child td {
-      border-bottom: none;
-    }
+    tr:last-child td { border-bottom: none; }
 
     .toast {
       position: fixed;
@@ -383,57 +325,20 @@
       z-index: 50;
     }
 
-    .toast.show {
-      display: block;
-    }
-
-    .toast.ok {
-      background: #05603A;
-    }
-
-    .toast.warn {
-      background: #7A2E0E;
-    }
+    .toast.show { display: block; }
+    .toast.ok { background: #05603A; }
+    .toast.warn { background: #7A2E0E; }
 
     @media (max-width: 920px) {
-      body {
-        padding: 10px;
-      }
-
-      .hero {
-        grid-template-columns: 1fr;
-        padding: 18px;
-        border-radius: 22px;
-      }
-
-      h1 {
-        font-size: 25px;
-      }
-
-      .main-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .manual-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .toolbar {
-        align-items: stretch;
-      }
-
-      .stats,
-      .buttons {
-        width: 100%;
-      }
-
-      .stat {
-        flex: 1 1 120px;
-      }
-
-      table {
-        min-width: 760px;
-      }
+      body { padding: 10px; }
+      .hero { grid-template-columns: 1fr; padding: 18px; border-radius: 22px; }
+      h1 { font-size: 25px; }
+      .main-grid { grid-template-columns: 1fr; }
+      .manual-grid { grid-template-columns: 1fr; }
+      .toolbar { align-items: stretch; }
+      .stats, .buttons { width: 100%; }
+      .stat { flex: 1 1 120px; }
+      table { min-width: 860px; }
     }
   </style>
 </head>
@@ -452,7 +357,7 @@
         <h1>Registro temporal de salidas de supermercado a borde de línea</h1>
         <p class="subtitle">
           Introduce el número de serie del coche, escanea cada QR del bloque BOL y, al finalizar la preparación,
-          envía un resumen a la responsable de petición de materiales.
+          envía a Bea una tabla única con los bloques y materiales a reponer.
         </p>
       </div>
 
@@ -476,10 +381,10 @@
           <div id="reader"></div>
         </div>
 
-        <p class="hint">
-          El QR debe contener líneas tipo <strong>B:</strong> bloque, <strong>Z:</strong> zona, <strong>C:</strong> coche,
-          <strong>S:</strong> supermercado, <strong>P:</strong> preparación y después los componentes.
-        </p>
+        <p class="hint">Formato recomendado del QR:</p>
+        <div class="code-sample">BOL|310-P8.1
+ITEM|BB2369380010100|MITAD ENGANCHE 1168354|Carril|BAJO
+ITEM|BB2369420000500P|PIEZA INTERMEDIA RAL 7043 ST|Carril|BAJO</div>
 
         <div class="buttons">
           <button class="btn-primary" id="startScan" type="button">Iniciar cámara</button>
@@ -498,37 +403,17 @@
         <div class="manual-grid">
           <div>
             <label for="mBlock">Bloque BOL</label>
-            <input id="mBlock" placeholder="120-P100.1">
+            <input id="mBlock" placeholder="310-P8.1">
           </div>
 
           <div>
-            <label for="mCar">Coche</label>
-            <input id="mCar" placeholder="C120">
-          </div>
-
-          <div>
-            <label for="mZone">Zona</label>
-            <input id="mZone" placeholder="SALA / SC / BB">
-          </div>
-
-          <div>
-            <label for="mSm">SM</label>
-            <input id="mSm" placeholder="Carril / Playa">
-          </div>
-
-          <div>
-            <label for="mPrep">PREP</label>
-            <input id="mPrep" placeholder="Sí / No">
-          </div>
-
-          <div>
-            <label for="mCount">Nº componentes</label>
-            <input id="mCount" type="number" min="0" placeholder="3">
+            <label for="mCount">Nº materiales</label>
+            <input id="mCount" type="number" min="0" placeholder="2">
           </div>
 
           <div class="full">
-            <label for="mComponents">Componentes separados por salto de línea</label>
-            <textarea id="mComponents" placeholder="BB2360711000100&#10;BB23600711000B0"></textarea>
+            <label for="mItems">Materiales separados por salto de línea</label>
+            <textarea id="mItems" placeholder="BB2369380010100 | MITAD ENGANCHE 1168354 | Carril | BAJO&#10;BB2369420000500P | PIEZA INTERMEDIA RAL 7043 ST | Carril | BAJO"></textarea>
           </div>
         </div>
 
@@ -536,7 +421,9 @@
           <button class="btn-secondary" id="addManual" type="button">Añadir registro manual</button>
         </div>
 
-        <p class="hint">Esta opción sirve si la cámara falla o el QR está deteriorado.</p>
+        <p class="hint">
+          Cada línea manual debe seguir este orden: componente | descripción | ubicación supermercado | zona BDL.
+        </p>
       </div>
     </section>
 
@@ -547,12 +434,12 @@
           <span>bloques registrados</span>
         </div>
         <div class="stat">
-          <b id="countComponents">0</b>
-          <span>componentes asociados</span>
+          <b id="countItems">0</b>
+          <span>materiales asociados</span>
         </div>
         <div class="stat">
-          <b id="countCars">0</b>
-          <span>coches distintos</span>
+          <b id="countDuplicateBlocks">0</b>
+          <span>bloques repetidos</span>
         </div>
       </div>
 
@@ -576,12 +463,11 @@
           <thead>
             <tr>
               <th>Hora</th>
-              <th>Bloque</th>
-              <th>Zona</th>
-              <th>Coche</th>
-              <th>SM</th>
-              <th>PREP</th>
-              <th>Componentes</th>
+              <th>Bloque BOL</th>
+              <th>Nº materiales</th>
+              <th>Ubicación supermercado</th>
+              <th>Zona BDL</th>
+              <th>Detalle materiales</th>
               <th>Acción</th>
             </tr>
           </thead>
@@ -595,37 +481,33 @@
 
   <script>
     const BEATRIZ_EMAIL = "beatriz.albiach@stadlerrail.com";
-    const STORAGE_KEY = "kanban_bol_es0304_session_v2";
+    const STORAGE_KEY = "kanban_bol_es0304_session_v3";
 
     const state = {
       records: [],
       scanner: null,
-      scanning: false
+      scanning: false,
+      lastScanAt: 0,
+      lastScanText: ""
     };
 
-    function el(id) {
-      return document.getElementById(id);
-    }
+    function el(id) { return document.getElementById(id); }
 
     function toast(message, type) {
       const box = el("toast");
       box.textContent = message;
       box.className = "toast show " + (type || "");
-      setTimeout(function () {
-        box.className = "toast";
-      }, 2800);
+      setTimeout(function () { box.className = "toast"; }, 2800);
     }
 
     function escapeHtml(value) {
       return String(value == null ? "" : value).replace(/[&<>\"']/g, function (char) {
-        return {
-          "&": "&amp;",
-          "<": "&lt;",
-          ">": "&gt;",
-          "\"": "&quot;",
-          "'": "&#39;"
-        }[char];
+        return { "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[char];
       });
+    }
+
+    function uniqueText(values) {
+      return Array.from(new Set(values.filter(Boolean))).join(", ");
     }
 
     function loadSession() {
@@ -650,8 +532,24 @@
       localStorage.setItem(STORAGE_KEY + "_operator", el("operator").value.trim());
     }
 
+    function normalizeQrText(rawText) {
+      if (rawText.includes("data=")) {
+        return decodeURIComponent(rawText.split("data=").pop());
+      }
+      return rawText;
+    }
+
+    function parseItemParts(parts) {
+      return {
+        component: (parts[0] || "").trim(),
+        description: (parts[1] || "").trim(),
+        supermarketLocation: (parts[2] || "").trim(),
+        bdlZone: (parts[3] || "").trim()
+      };
+    }
+
     function parseQr(rawText) {
-      const decoded = rawText.includes("data=") ? decodeURIComponent(rawText.split("data=").pop()) : rawText;
+      const decoded = normalizeQrText(rawText);
       const lines = decoded.split(/\r?\n/).map(function (line) {
         return line.trim();
       }).filter(Boolean);
@@ -661,23 +559,55 @@
         raw: decoded,
         time: new Date().toISOString(),
         block: "",
-        zone: "",
-        car: "",
-        sm: "",
-        prep: "",
-        components: []
+        items: []
       };
 
       lines.forEach(function (line) {
-        if (line.indexOf("B:") === 0) record.block = line.slice(2).trim();
-        else if (line.indexOf("Z:") === 0) record.zone = line.slice(2).trim();
-        else if (line.indexOf("C:") === 0) record.car = line.slice(2).trim();
-        else if (line.indexOf("S:") === 0) record.sm = line.slice(2).trim();
-        else if (line.indexOf("P:") === 0) record.prep = line.slice(2).trim();
-        else record.components.push(line.trim());
+        const clean = line.trim();
+        const lower = clean.toLowerCase();
+
+        if (clean.indexOf("BOL|") === 0) {
+          record.block = clean.split("|")[1] ? clean.split("|")[1].trim() : "";
+          return;
+        }
+
+        if (lower.indexOf("bloque bol:") === 0) {
+          record.block = clean.split(":").slice(1).join(":").trim();
+          return;
+        }
+
+        if (clean.indexOf("B:") === 0) {
+          record.block = clean.slice(2).trim();
+          return;
+        }
+
+        if (lower.indexOf("componente") === 0 && clean.indexOf("|") > -1) {
+          return;
+        }
+
+        if (clean.indexOf("ITEM|") === 0) {
+          const parts = clean.split("|").slice(1);
+          record.items.push(parseItemParts(parts));
+          return;
+        }
+
+        if (clean.indexOf("|") > -1) {
+          const parts = clean.split("|");
+          record.items.push(parseItemParts(parts));
+          return;
+        }
+
+        if (clean.length > 0) {
+          record.items.push({
+            component: clean,
+            description: "",
+            supermarketLocation: "",
+            bdlZone: ""
+          });
+        }
       });
 
-      record.count = record.components.length;
+      record.count = record.items.length;
       return record;
     }
 
@@ -690,7 +620,7 @@
       }
 
       if (!record.block) {
-        toast("QR no válido: no se ha encontrado el campo B: bloque.", "warn");
+        toast("QR no válido: no se ha encontrado el bloque BOL.", "warn");
         return;
       }
 
@@ -699,7 +629,7 @@
       });
 
       if (duplicate) {
-        const accept = confirm("El bloque " + record.block + " ya está registrado en esta sesión. ¿Quieres añadirlo igualmente?");
+        const accept = confirm("El bloque " + record.block + " ya está registrado en esta sesión. ¿Confirmas registrar otro movimiento del mismo bloque?");
         if (!accept) return;
       }
 
@@ -709,52 +639,62 @@
       saveSession();
       render();
 
+      const sm = uniqueText(record.items.map(function (item) { return item.supermarketLocation; })) || "-";
+      const bdl = uniqueText(record.items.map(function (item) { return item.bdlZone; })) || "-";
+
       el("lastScan").textContent =
         "Último escaneo registrado:\n" +
-        "Bloque: " + (record.block || "-") + "\n" +
-        "Zona: " + (record.zone || "-") + "\n" +
-        "Coche: " + (record.car || "-") + "\n" +
-        "Componentes: " + (record.count || 0);
+        "Bloque BOL: " + (record.block || "-") + "\n" +
+        "Materiales: " + (record.count || 0) + "\n" +
+        "Ubicación supermercado: " + sm + "\n" +
+        "Zona BDL: " + bdl;
 
       toast("Bloque " + record.block + " registrado", "ok");
     }
 
+    function countRepeatedBlocks(records) {
+      const counts = {};
+      records.forEach(function (record) {
+        counts[record.block] = (counts[record.block] || 0) + 1;
+      });
+      return Object.keys(counts).filter(function (block) { return counts[block] > 1; }).length;
+    }
+
     function render() {
       const records = state.records;
-      const totalComponents = records.reduce(function (sum, item) {
+      const totalItems = records.reduce(function (sum, item) {
         return sum + (Number(item.count) || 0);
       }, 0);
 
-      const cars = new Set(records.map(function (item) {
-        return item.car;
-      }).filter(Boolean));
-
       el("countBlocks").textContent = records.length;
-      el("countComponents").textContent = totalComponents;
-      el("countCars").textContent = cars.size;
+      el("countItems").textContent = totalItems;
+      el("countDuplicateBlocks").textContent = countRepeatedBlocks(records);
 
       el("empty").style.display = records.length ? "none" : "block";
       el("tableWrap").style.display = records.length ? "block" : "none";
 
       el("rows").innerHTML = records.map(function (record) {
         const time = new Date(record.time).toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" });
+        const sm = uniqueText((record.items || []).map(function (item) { return item.supermarketLocation; })) || "-";
+        const bdl = uniqueText((record.items || []).map(function (item) { return item.bdlZone; })) || "-";
+        const detail = (record.items || []).map(function (item) {
+          return item.component + (item.description ? " - " + item.description : "");
+        }).join("; ");
+
         return "<tr>" +
           "<td>" + escapeHtml(time) + "</td>" +
           "<td><strong>" + escapeHtml(record.block || "-") + "</strong></td>" +
-          "<td>" + escapeHtml(record.zone || "-") + "</td>" +
-          "<td>" + escapeHtml(record.car || "-") + "</td>" +
-          "<td>" + escapeHtml(record.sm || "-") + "</td>" +
-          "<td>" + escapeHtml(record.prep || "-") + "</td>" +
-          "<td>" + escapeHtml((record.components || []).join(", ")) + "</td>" +
+          "<td>" + escapeHtml(record.count || 0) + "</td>" +
+          "<td>" + escapeHtml(sm) + "</td>" +
+          "<td>" + escapeHtml(bdl) + "</td>" +
+          "<td>" + escapeHtml(detail || "-") + "</td>" +
           "<td><button class=\"btn-ghost\" type=\"button\" onclick=\"removeRecord('" + record.id + "')\">Eliminar</button></td>" +
           "</tr>";
       }).join("");
     }
 
     window.removeRecord = function (id) {
-      state.records = state.records.filter(function (record) {
-        return record.id !== id;
-      });
+      state.records = state.records.filter(function (record) { return record.id !== id; });
       saveSession();
       render();
     };
@@ -767,15 +707,17 @@
         return;
       }
 
-      if (!state.scanner) {
-        state.scanner = new Html5Qrcode("reader");
-      }
+      if (!state.scanner) state.scanner = new Html5Qrcode("reader");
 
       try {
         await state.scanner.start(
           { facingMode: "environment" },
           { fps: 10, qrbox: { width: 250, height: 250 } },
           function (decodedText) {
+            const now = Date.now();
+            if (decodedText === state.lastScanText && now - state.lastScanAt < 2500) return;
+            state.lastScanText = decodedText;
+            state.lastScanAt = now;
             addRecord(parseQr(decodedText));
           }
         );
@@ -792,13 +734,39 @@
       }
     }
 
+    function buildFlatRows() {
+      const rows = [];
+      state.records.forEach(function (record) {
+        if (!record.items || !record.items.length) {
+          rows.push({
+            block: record.block,
+            component: "",
+            description: "",
+            supermarketLocation: "",
+            bdlZone: ""
+          });
+          return;
+        }
+
+        record.items.forEach(function (item) {
+          rows.push({
+            block: record.block,
+            component: item.component || "",
+            description: item.description || "",
+            supermarketLocation: item.supermarketLocation || "",
+            bdlZone: item.bdlZone || ""
+          });
+        });
+      });
+      return rows;
+    }
+
     function buildEmailBody() {
       const serial = el("serial").value.trim();
       const operator = el("operator").value.trim();
       const date = new Date().toLocaleString("es-ES");
-      const totalComponents = state.records.reduce(function (sum, item) {
-        return sum + (Number(item.count) || 0);
-      }, 0);
+      const flatRows = buildFlatRows();
+      const duplicateCount = countRepeatedBlocks(state.records);
 
       const lines = [];
       lines.push("Hola Beatriz,");
@@ -807,22 +775,25 @@
       lines.push("Operario/equipo: " + (operator || "No indicado"));
       lines.push("Fecha y hora de envío: " + date);
       lines.push("");
-      lines.push("Bloques registrados:");
+      lines.push("Tabla de materiales a reponer:");
+      lines.push("Bloque BOL\tComponente\tDescripción\tUbicación supermercado\tZona BDL");
 
-      state.records.forEach(function (record, index) {
+      flatRows.forEach(function (row) {
         lines.push(
-          (index + 1) + ". " + (record.block || "-") +
-          " | Zona: " + (record.zone || "-") +
-          " | Coche: " + (record.car || "-") +
-          " | SM: " + (record.sm || "-") +
-          " | PREP: " + (record.prep || "-") +
-          " | Componentes: " + ((record.components || []).join(", ") || "-")
+          (row.block || "-") + "\t" +
+          (row.component || "-") + "\t" +
+          (row.description || "-") + "\t" +
+          (row.supermarketLocation || "-") + "\t" +
+          (row.bdlZone || "-")
         );
       });
 
       lines.push("");
-      lines.push("Total bloques: " + state.records.length);
-      lines.push("Total componentes asociados: " + totalComponents);
+      lines.push("Total bloques escaneados: " + state.records.length);
+      lines.push("Total líneas de material: " + flatRows.length);
+      if (duplicateCount > 0) {
+        lines.push("Aviso: hay " + duplicateCount + " bloque(s) BOL repetido(s) en la sesión. Revisar si corresponde a un segundo movimiento real.");
+      }
       lines.push("");
       lines.push("Un saludo.");
 
@@ -856,20 +827,22 @@
         return;
       }
 
-      const headers = ["serie", "operario", "fecha_hora", "bloque", "zona", "coche", "sm", "prep", "num_componentes", "componentes"];
-      const rows = state.records.map(function (record) {
-        return [
-          el("serial").value.trim(),
-          el("operator").value.trim(),
-          record.time,
-          record.block,
-          record.zone,
-          record.car,
-          record.sm,
-          record.prep,
-          record.count,
-          (record.components || []).join(" | ")
-        ];
+      const headers = ["serie", "operario", "fecha_hora", "bloque_bol", "componente", "descripcion", "ubicacion_supermercado", "zona_bdl"];
+      const rows = [];
+
+      state.records.forEach(function (record) {
+        (record.items || []).forEach(function (item) {
+          rows.push([
+            el("serial").value.trim(),
+            el("operator").value.trim(),
+            record.time,
+            record.block,
+            item.component,
+            item.description,
+            item.supermarketLocation,
+            item.bdlZone
+          ]);
+        });
       });
 
       const csv = [headers].concat(rows).map(function (row) {
@@ -904,21 +877,22 @@
     });
 
     el("addManual").addEventListener("click", function () {
-      const components = el("mComponents").value.split(/\r?\n/).map(function (line) {
+      const items = el("mItems").value.split(/\r?\n/).map(function (line) {
         return line.trim();
-      }).filter(Boolean);
+      }).filter(Boolean).map(function (line) {
+        const parts = line.split("|");
+        return parseItemParts(parts);
+      });
+
+      const count = Number(el("mCount").value) || items.length;
 
       addRecord({
         id: "manual_" + Date.now(),
         raw: "manual",
         time: new Date().toISOString(),
         block: el("mBlock").value.trim(),
-        car: el("mCar").value.trim(),
-        zone: el("mZone").value.trim(),
-        sm: el("mSm").value.trim(),
-        prep: el("mPrep").value.trim(),
-        components: components,
-        count: Number(el("mCount").value) || components.length
+        items: items,
+        count: count
       });
     });
 
