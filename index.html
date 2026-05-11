@@ -761,6 +761,15 @@ ITEM|BB2369420000500P|PIEZA INTERMEDIA RAL 7043 ST|Carril|BAJO</div>
       return rows;
     }
 
+    function emailCell(value) {
+      return String(value == null || value === "" ? "-" : value)
+        .replace(/;/g, ",")
+        .replace(/
+?
+/g, " ")
+        .trim();
+    }
+
     function buildEmailBody() {
       const serial = el("serial").value.trim();
       const operator = el("operator").value.trim();
@@ -775,19 +784,23 @@ ITEM|BB2369420000500P|PIEZA INTERMEDIA RAL 7043 ST|Carril|BAJO</div>
       lines.push("Operario/equipo: " + (operator || "No indicado"));
       lines.push("Fecha y hora de envío: " + date);
       lines.push("");
-      lines.push("Tabla de materiales a reponer:");
-      lines.push("Bloque BOL\tComponente\tDescripción\tUbicación supermercado\tZona BDL");
+      lines.push("Tabla de materiales a reponer en formato CSV con separador punto y coma (;):");
+      lines.push("Copia desde la línea CABECERA_CSV hasta FIN_CSV y en Excel usa Datos > Texto en columnas > Delimitado > Punto y coma.");
+      lines.push("");
+      lines.push("CABECERA_CSV");
+      lines.push("Bloque BOL;Componente;Descripción;Ubicación supermercado;Zona BDL");
 
       flatRows.forEach(function (row) {
         lines.push(
-          (row.block || "-") + "\t" +
-          (row.component || "-") + "\t" +
-          (row.description || "-") + "\t" +
-          (row.supermarketLocation || "-") + "\t" +
-          (row.bdlZone || "-")
+          emailCell(row.block) + ";" +
+          emailCell(row.component) + ";" +
+          emailCell(row.description) + ";" +
+          emailCell(row.supermarketLocation) + ";" +
+          emailCell(row.bdlZone)
         );
       });
 
+      lines.push("FIN_CSV");
       lines.push("");
       lines.push("Total bloques escaneados: " + state.records.length);
       lines.push("Total líneas de material: " + flatRows.length);
@@ -797,7 +810,8 @@ ITEM|BB2369420000500P|PIEZA INTERMEDIA RAL 7043 ST|Carril|BAJO</div>
       lines.push("");
       lines.push("Un saludo.");
 
-      return lines.join("\n");
+      return lines.join("
+");
     }
 
     function sendEmail() {
