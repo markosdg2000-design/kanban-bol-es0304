@@ -707,17 +707,15 @@ ITEM|BB2369420000500P|PIEZA INTERMEDIA RAL 7043 ST|Carril|BAJO</div>
         return;
       }
 
-      if (!state.scanner) state.scanner = new Html5Qrcode("reader");
+      if (!state.scanner) {
+        state.scanner = new Html5Qrcode("reader");
+      }
 
       try {
         await state.scanner.start(
           { facingMode: "environment" },
           { fps: 10, qrbox: { width: 250, height: 250 } },
           function (decodedText) {
-            const now = Date.now();
-            if (decodedText === state.lastScanText && now - state.lastScanAt < 2500) return;
-            state.lastScanText = decodedText;
-            state.lastScanAt = now;
             addRecord(parseQr(decodedText));
           }
         );
@@ -763,10 +761,9 @@ ITEM|BB2369420000500P|PIEZA INTERMEDIA RAL 7043 ST|Carril|BAJO</div>
 
     function emailCell(value) {
       return String(value == null || value === "" ? "-" : value)
-        .replace(/;/g, ",")
-        .replace(/
-?
-/g, " ")
+        .replaceAll(";", ",")
+        .replaceAll(String.fromCharCode(10), " ")
+        .replaceAll(String.fromCharCode(13), " ")
         .trim();
     }
 
